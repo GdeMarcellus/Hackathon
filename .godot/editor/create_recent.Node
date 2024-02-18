@@ -1,14 +1,14 @@
 AudioStreamPlayer
+TextureRect
+Camera2D
 AnimationPlayer
 CollisionShape2D
 Node2D
 ColorRect
 Sprite2D
-TextureRect
 TileMap
 PathFollow2D
 Timer
 Path2D
 TextureButton
 Control
-Panel

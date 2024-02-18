@@ -6,6 +6,8 @@ var simultaneous_scene = preload("res://Menu/mainMenu.tscn").instantiate()
 @onready var audio_level_1 = $AudioLevel1
 @onready var audio_level_2 = $AudioLevel2
 @onready var audio_level_3 = $AudioLevel3
+@onready var audio_level_4 = $AudioLevel4
+@onready var audio_level_5 = $AudioLevel5
 @onready var button_audio = $ButtonAudio
 
 @onready var animation = $AnimationPlayer
@@ -16,7 +18,7 @@ var simultaneous_scene = preload("res://Menu/mainMenu.tscn").instantiate()
 var wait_time : float = 0.75
 
 func _ready():
-	gameOver.hide()
+	gameOver.visible = false
 	audio_level_1.play()
 	for each : Enemy in $Enemies.get_children():
 		each.player = $Player
@@ -49,29 +51,40 @@ func _on_mob_timer_timeout():
 
 func _on_player_died():
 	get_tree().paused = true
+	$Camera2D.make_current()
 	$GameOver.visible = true
 
 
-func _on_try_again_button_pressed():
-	print("button pressed")
-	button_audio.play()
-	get_tree().reload_current_scene()
-
-
 func _on_player_level(value):
-	if value >= 2:
+	if value >= 8:
 		audio_level_1.stop()
-		audio_level_2.play()
-		audio_level_3.play()
+		audio_level_2.stop()
+		audio_level_3.stop()
+		audio_level_4.stop()
+		audio_level_5.play()
+	elif value >= 6:
+		audio_level_1.stop()
+		audio_level_2.stop()
+		audio_level_3.stop()
+		audio_level_4.play()
+		audio_level_5.stop()
 	elif value >= 4:
 		audio_level_1.stop()
-		audio_level_2.atop()
+		audio_level_2.stop()
 		audio_level_3.play()
+		audio_level_4.stop()
+		audio_level_5.stop()
+	elif value >= 2:
+		audio_level_1.stop()
+		audio_level_2.play()
+		audio_level_3.stop()
+		audio_level_4.stop()
+		audio_level_5.stop()
 	
 
 
 func _on_button_pressed():
 	animation.play("FadeOut")
 	await animation.animation_finished
-	get_tree().root.add_child(simultaneous_scene)
-	get_node("/root/MainMenu").queue_free()
+	gameOver.visible = false
+	get_tree().change_scene_to_file("res://Menu/mainMenu.tscn")

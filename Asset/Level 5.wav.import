@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ciiflsjwor8ih"
+path="res://.godot/imported/Level 5.wav-e693c4c296d1b4c5f013e8e332e85cbf.sample"
+
+[deps]
+
+source_file="res://Asset/Level 5.wav"
+dest_files=["res://.godot/imported/Level 5.wav-e693c4c296d1b4c5f013e8e332e85cbf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

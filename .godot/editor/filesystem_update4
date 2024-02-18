@@ -15,3 +15,6 @@ res://Ability/disc_projectile.tscn
 res://Ability/disc_projectile.gd
 res://Player.gd
 res://Component/HitBox/Hutbox.gd
+res://Enemy/Enemy.tscn
+res://Enemy/Enemy_disc.tscn
+res://Enemy/Stats.gd

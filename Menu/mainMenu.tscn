@@ -1,6 +1,5 @@
 [gd_scene load_steps=18 format=3 uid="uid://eqophvgbb1bt"]
 
-[ext_resource type="Texture2D" uid="uid://d3byhytbc7d1x" path="res://Asset/Clippy.webp" id="1_4ops2"]
 [ext_resource type="Script" path="res://Menu/mainMenu.gd" id="1_hat3v"]
 [ext_resource type="Texture2D" uid="uid://bbeiuts5rfeag" path="res://Asset/player2sheet.png" id="3_roy44"]
 [ext_resource type="Texture2D" uid="uid://nicphgvrxx10" path="res://Asset/Frame 1-sheet.png" id="4_7768a"]
@@ -11,18 +10,8 @@
 [ext_resource type="Theme" uid="uid://db5hnr0gnd5vl" path="res://Asset/Default.tres" id="8_j3eb0"]
 [ext_resource type="AudioStream" uid="uid://d0obwcjjp7nj2" path="res://Asset/Button_Click.wav" id="11_ealh8"]
 [ext_resource type="Texture2D" uid="uid://b8g382csbdxo0" path="res://Asset/ui1wbg.png" id="12_d12h2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thh3r"]
-bg_color = Color(0.737255, 0.733333, 0.490196, 1)
-skew = Vector2(0.05, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_left = 6
+[ext_resource type="AudioStream" uid="uid://bkdn2umwux1ht" path="res://Asset/Menu Theme.wav" id="12_stiyl"]
+[ext_resource type="Texture2D" uid="uid://ddl76ccaqmbx3" path="res://amongOSlogo.png" id="12_vjvnd"]
 
 [sub_resource type="Animation" id="Animation_lygx4"]
 resource_name = "FadeOut"
@@ -156,13 +145,21 @@ offset_bottom = 896.0
 texture = ExtResource("7_nhmco")
 stretch_mode = 1
 
+[node name="TextureRect3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 56.0
+offset_right = 976.0
+offset_bottom = 431.0
+texture = ExtResource("12_vjvnd")
+
 [node name="PlayButton" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 568.0
-offset_top = 368.0
-offset_right = 904.0
-offset_bottom = 560.0
+offset_left = 608.0
+offset_top = 488.0
+offset_right = 944.0
+offset_bottom = 680.0
 theme = ExtResource("8_j3eb0")
 text = "Play"
 
@@ -175,37 +172,6 @@ offset_bottom = 272.0
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 1328.0
-offset_top = 568.0
-offset_right = 1536.0
-offset_bottom = 832.0
-texture = ExtResource("1_4ops2")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Panel" type="Panel" parent="TextureRect"]
-layout_mode = 0
-offset_left = -216.0
-offset_top = -16.0
-offset_right = 24.0
-offset_bottom = 64.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_thh3r")
-
-[node name="Label" type="Label" parent="TextureRect/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Click on me for a tutorial!!!"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_14ddw")
@@ -213,10 +179,10 @@ libraries = {
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 616.0
-offset_right = 304.0
-offset_bottom = 832.0
+offset_left = 1344.0
+offset_top = 680.0
+offset_right = 1600.0
+offset_bottom = 896.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_ex5ph")
 
@@ -251,6 +217,10 @@ color = Color(0, 0, 0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_ealh8")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_stiyl")
+autoplay = true
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

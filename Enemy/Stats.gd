@@ -28,7 +28,7 @@ func set_level(value):
 	emit_signal("level_up")
 
 func get_max_exp(_level):
-	return pow((1 +5), (_level + 1))
+	return pow((2), (_level + 1))
 
 func set_EXP(value):
 	if value >= MAX_EXP:
