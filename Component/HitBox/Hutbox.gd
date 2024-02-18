@@ -32,5 +32,5 @@ func _on_Hurtbox_invincibility_ended():
 	collisionShape.disabled = false
 
 
-func _on_stats_health_changed(value, max_value):
-	start_invincibility(.3)
+func _on_stats_health_changed(_value, _max_value):
+	start_invincibility(.58)

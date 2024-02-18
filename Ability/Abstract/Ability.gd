@@ -19,5 +19,5 @@ func delay_changed(value):
 	if timer_between_shot:
 		timer_between_shot.wait_time = delay
 
-func apply_effect(player : Player):
+func apply_effect(_player : Player):
 	pass

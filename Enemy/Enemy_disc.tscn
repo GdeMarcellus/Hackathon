@@ -145,8 +145,8 @@ hframes = 8
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("7_0r8d8")
-MAX_HEALTH = 2
-HEALTH = 2
+SPEED = 330
+HEALTH = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

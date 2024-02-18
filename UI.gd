@@ -57,5 +57,5 @@ func _on_popup_menu_visibility_changed():
 	$Control/Panel.visible = !$Control/Panel.visible
 
 
-func _on_stats_health_changed(value, previous_value):
+func _on_stats_health_changed(value, _previous_value):
 	$Control/Health.value = value

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cgpcu18ugr1h"]
 
 [ext_resource type="Script" path="res://Item/pickUp.gd" id="1_bxjqy"]
-[ext_resource type="Texture2D" uid="uid://ciaif6eyin8dh" path="res://icon.svg" id="2_wwuv4"]
+[ext_resource type="Texture2D" uid="uid://xc8qlsufbigr" path="res://Asset/floppy.png" id="2_nelp1"]
 [ext_resource type="PackedScene" uid="uid://dkisflc7ec6cf" path="res://Component/SoftColision.tscn" id="3_gm70t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_anqh2"]
@@ -16,8 +16,8 @@ collision_mask = 40
 script = ExtResource("1_bxjqy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_wwuv4")
+texture_filter = 1
+texture = ExtResource("2_nelp1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_anqh2")

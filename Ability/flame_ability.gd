@@ -5,6 +5,7 @@ extends AbilityProjectile
 
 func activate():
 	if timer_between_shot.is_stopped():
+		$AudioStreamPlayer.play()
 		if projectile:
 			timer_between_particle.start()
 			life_time_timer.start()

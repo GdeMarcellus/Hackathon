@@ -1,3 +1,9 @@
+AudioStreamPlayer
+AnimationPlayer
+CollisionShape2D
+Node2D
+ColorRect
+Sprite2D
 TextureRect
 TileMap
 PathFollow2D
@@ -6,9 +12,3 @@ Path2D
 TextureButton
 Control
 Panel
-VBoxContainer
-HBoxContainer
-ItemList
-Button
-Sprite2D
-CollisionShape2D

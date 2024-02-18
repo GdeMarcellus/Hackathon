@@ -9,6 +9,7 @@ func activate():
 			var angle_spread = 6.28319/10
 			var vector = Vector2.RIGHT * 10
 			while amount <= target:
+				$AudioStreamPlayer.play()
 				var b : Projectile = projectile.instantiate()
 				get_tree().get_root().add_child(b)
 				vector.rotated(angle_spread*amount)

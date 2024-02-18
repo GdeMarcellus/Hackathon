@@ -146,6 +146,7 @@ hframes = 6
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("7_sd187")
+SPEED = 200
 MAX_HEALTH = 2
 HEALTH = 2
 

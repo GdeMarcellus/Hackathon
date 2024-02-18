@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bonlyfrel4wx"]
+[gd_scene load_steps=6 format=3 uid="uid://bonlyfrel4wx"]
 
 [ext_resource type="PackedScene" uid="uid://bmsl61ly0mubl" path="res://Ability/Abstract/ability_projectile.tscn" id="1_re8s3"]
 [ext_resource type="Script" path="res://Ability/disc_projectile.gd" id="2_mbc5y"]
 [ext_resource type="PackedScene" uid="uid://dnbtwfgnfuklr" path="res://Projectile/Disc.tscn" id="3_3aouy"]
 [ext_resource type="Texture2D" uid="uid://cp11xns3mgoqk" path="res://Asset/cdframe1.png" id="4_ywq2w"]
+[ext_resource type="AudioStream" uid="uid://dm5wcnknbht6f" path="res://Asset/Projectile_3.wav" id="5_3pp2j"]
 
 [node name="DiscProjectile" instance=ExtResource("1_re8s3")]
 texture_filter = 1
@@ -13,3 +14,7 @@ ability_name = "Disc"
 ability_descrtiption = "This disc throws a wallop in many direction"
 icon = ExtResource("4_ywq2w")
 delay = 0.7
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="1"]
+stream = ExtResource("5_3pp2j")
+volume_db = 10.0

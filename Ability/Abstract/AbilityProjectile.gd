@@ -7,6 +7,7 @@ class_name AbilityProjectile
 func activate():
 	if timer_between_shot.is_stopped():
 		if projectile:
+			$AudioStreamPlayer.play()
 			var b = projectile.instantiate()
 			get_tree().get_root().add_child(b)
 			b.global_transform = self.global_transform

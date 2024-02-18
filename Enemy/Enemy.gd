@@ -24,7 +24,7 @@ func _physics_process(delta):
 func _on_DetectRadius_body_entered(body):
 	player = body
 
-func _on_DetectRadius_body_exited(body):
+func _on_DetectRadius_body_exited(_body):
 	player = null
 
 func _player_change():

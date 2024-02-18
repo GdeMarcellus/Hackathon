@@ -17,6 +17,7 @@ func _process(delta):
 	pass
 
 func _on_play_button_pressed():
+	$AudioStreamPlayer.play()
 	fadeout.play("FadeOut")
 
 

@@ -4,7 +4,7 @@ extends Ability
 @export var speed_change = 2
 var changed = []
 
-func _process(delta):
+func _process(_delta):
 	$Area2D/Sprite2D.global_rotation = 0
 
 func _on_area_2d_body_entered(body):

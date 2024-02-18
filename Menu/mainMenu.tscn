@@ -2,20 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://d3byhytbc7d1x" path="res://Asset/Clippy.webp" id="1_4ops2"]
 [ext_resource type="Script" path="res://Menu/mainMenu.gd" id="1_hat3v"]
-[ext_resource type="Texture2D" uid="uid://bfnvw1ti63wk8" path="res://Asset/uiwipfull1.png" id="3_1eu12"]
 [ext_resource type="Texture2D" uid="uid://bbeiuts5rfeag" path="res://Asset/player2sheet.png" id="3_roy44"]
 [ext_resource type="Texture2D" uid="uid://nicphgvrxx10" path="res://Asset/Frame 1-sheet.png" id="4_7768a"]
 [ext_resource type="Texture2D" uid="uid://ds0v68lwjr407" path="res://Asset/player3sheet.png" id="4_s0dpa"]
 [ext_resource type="Texture2D" uid="uid://dv1jk2j3od0sw" path="res://Asset/player4sheet.png" id="5_p7dmq"]
 [ext_resource type="Texture2D" uid="uid://bglgx6fhwtrk3" path="res://Asset/player5sheet.png" id="6_bsaev"]
-[ext_resource type="Texture2D" uid="uid://dd0iaf767axn6" path="res://Asset/longbuttontiles.png" id="7_bt8xy"]
 [ext_resource type="Texture2D" uid="uid://baenqf35gqsax" path="res://Asset/amongOSbg.png" id="7_nhmco"]
-[ext_resource type="FontFile" uid="uid://cv0sa2ok1ntbn" path="res://Asset/DotGothic16-Regular.ttf" id="7_tw53o"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xdjn1"]
-texture = ExtResource("7_bt8xy")
-texture_margin_left = 64.0
-texture_margin_right = 64.0
+[ext_resource type="Theme" uid="uid://db5hnr0gnd5vl" path="res://Asset/Default.tres" id="8_j3eb0"]
+[ext_resource type="AudioStream" uid="uid://d0obwcjjp7nj2" path="res://Asset/Button_Click.wav" id="11_ealh8"]
+[ext_resource type="Texture2D" uid="uid://b8g382csbdxo0" path="res://Asset/ui1wbg.png" id="12_d12h2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thh3r"]
 bg_color = Color(0.737255, 0.733333, 0.490196, 1)
@@ -138,7 +133,9 @@ _data = {
 }
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ex5ph"]
-texture = ExtResource("3_1eu12")
+texture = ExtResource("12_d12h2")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gsan5"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -166,10 +163,7 @@ offset_left = 568.0
 offset_top = 368.0
 offset_right = 904.0
 offset_bottom = 560.0
-theme_override_colors/font_color = Color(0.752941, 0.509804, 0.109804, 1)
-theme_override_fonts/font = ExtResource("7_tw53o")
-theme_override_font_sizes/font_size = 50
-theme_override_styles/normal = SubResource("StyleBoxTexture_xdjn1")
+theme = ExtResource("8_j3eb0")
 text = "Play"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -228,13 +222,17 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_ex5ph")
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 48.0
-offset_right = 48.0
+offset_top = 40.0
+offset_right = 80.0
 offset_bottom = 72.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gsan5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_gsan5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gsan5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gsan5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gsan5")
 
 [node name="Sprite2D" type="Sprite2D" parent="Panel"]
-position = Vector2(120, 136)
+position = Vector2(120, 120)
 texture = ExtResource("4_7768a")
 hframes = 5
 
@@ -250,6 +248,9 @@ offset_left = 1600.0
 offset_right = 1640.0
 offset_bottom = 904.0
 color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ealh8")
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
