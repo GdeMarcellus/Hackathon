@@ -12,6 +12,7 @@ var invincibility : bool
 @onready var invincible_animation = $AnimationPlayer2
 
 func _ready():
+	$Sprite2D.texture = Globals.player_texture
 	UI.levelupTexture.hide()
 
 func _physics_process(delta):

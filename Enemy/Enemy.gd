@@ -7,14 +7,18 @@ var player = null
 @onready var stats = $Stats
 @onready var invincible_animation = $AnimationPlayer2
 @onready var hurtBox = $HurtBox
+@onready var softCollision = $SoftColision
 
 @export var drop : PackedScene
 
+signal died(value_position)
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
 	if player != null:
 		velocity = position.direction_to(player.position) * stats.SPEED
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * delta * 20000
 	move_and_slide()
 
 func _on_DetectRadius_body_entered(body):
@@ -32,10 +36,7 @@ func _on_hurt_box_area_entered(area):
 
 
 func _on_stats_dead():
-	if drop:
-		var b = drop.instantiate()
-		get_tree().get_root().add_child(b)
-		b.global_transform = self.global_transform
+	emit_signal("died",global_position)
 	queue_free()
 
 

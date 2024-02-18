@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgpcu18ugr1h"]
+[gd_scene load_steps=6 format=3 uid="uid://cgpcu18ugr1h"]
 
 [ext_resource type="Script" path="res://Item/pickUp.gd" id="1_bxjqy"]
 [ext_resource type="Texture2D" uid="uid://ciaif6eyin8dh" path="res://icon.svg" id="2_wwuv4"]
+[ext_resource type="PackedScene" uid="uid://dkisflc7ec6cf" path="res://Component/SoftColision.tscn" id="3_gm70t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_anqh2"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3v27f"]
 radius = 16.0
 
 [node name="Item" type="Area2D"]
@@ -18,4 +22,11 @@ texture = ExtResource("2_wwuv4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_anqh2")
 
+[node name="SoftColision" parent="." instance=ExtResource("3_gm70t")]
+
+[node name="CollisionShape2D" parent="SoftColision" index="0"]
+shape = SubResource("CircleShape2D_3v27f")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+
+[editable path="SoftColision"]

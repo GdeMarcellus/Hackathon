@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c47vpng4b3vrt"]
+[gd_scene load_steps=20 format=3 uid="uid://c47vpng4b3vrt"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_qauoj"]
 [ext_resource type="PackedScene" uid="uid://cgpcu18ugr1h" path="res://Item/Item.tscn" id="2_c5rds"]
@@ -7,15 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://xjp5ebq7ausd" path="res://Asset/FCTManager.tscn" id="3_ovkpn"]
 [ext_resource type="Script" path="res://Enemy/Stats.gd" id="5_528i1"]
 [ext_resource type="Texture2D" uid="uid://c8sp0kgxx5gwi" path="res://Asset/computer_surfing_sc.png" id="5_jilsm"]
+[ext_resource type="PackedScene" uid="uid://dkisflc7ec6cf" path="res://Component/SoftColision.tscn" id="8_ie1rj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jwq3"]
-size = Vector2(96, 96)
+size = Vector2(48, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4dys"]
 size = Vector2(32, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x31tu"]
-size = Vector2(96, 96)
+size = Vector2(64, 64)
 
 [sub_resource type="Animation" id="Animation_ski0d"]
 resource_name = "Idle"
@@ -109,12 +110,16 @@ _data = {
 "RESET": SubResource("Animation_phill")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldcny"]
+radius = 24.0
+
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 16
 script = ExtResource("1_qauoj")
 drop = ExtResource("2_c5rds")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_8jwq3")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_i1nq0")]
@@ -154,6 +159,12 @@ libraries = {
 "": SubResource("AnimationLibrary_of4dc")
 }
 
+[node name="SoftColision" parent="." instance=ExtResource("8_ie1rj")]
+
+[node name="CollisionShape2D" parent="SoftColision" index="0"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_ldcny")
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_hurt_box_invincibility_ended"]
 [connection signal="invincibility_started" from="HurtBox" to="." method="_on_hurt_box_invincibility_started"]
@@ -163,3 +174,4 @@ libraries = {
 
 [editable path="Hitbox"]
 [editable path="HurtBox"]
+[editable path="SoftColision"]

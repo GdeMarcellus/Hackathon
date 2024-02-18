@@ -1,7 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://eqophvgbb1bt"]
+[gd_scene load_steps=18 format=3 uid="uid://eqophvgbb1bt"]
 
 [ext_resource type="Texture2D" uid="uid://d3byhytbc7d1x" path="res://Asset/Clippy.webp" id="1_4ops2"]
 [ext_resource type="Script" path="res://Menu/mainMenu.gd" id="1_hat3v"]
+[ext_resource type="Texture2D" uid="uid://bfnvw1ti63wk8" path="res://Asset/uiwipfull1.png" id="3_1eu12"]
+[ext_resource type="Texture2D" uid="uid://bbeiuts5rfeag" path="res://Asset/player2sheet.png" id="3_roy44"]
+[ext_resource type="Texture2D" uid="uid://nicphgvrxx10" path="res://Asset/Frame 1-sheet.png" id="4_7768a"]
+[ext_resource type="Texture2D" uid="uid://ds0v68lwjr407" path="res://Asset/player3sheet.png" id="4_s0dpa"]
+[ext_resource type="Texture2D" uid="uid://dv1jk2j3od0sw" path="res://Asset/player4sheet.png" id="5_p7dmq"]
+[ext_resource type="Texture2D" uid="uid://bglgx6fhwtrk3" path="res://Asset/player5sheet.png" id="6_bsaev"]
+[ext_resource type="Texture2D" uid="uid://dd0iaf767axn6" path="res://Asset/longbuttontiles.png" id="7_bt8xy"]
+[ext_resource type="Texture2D" uid="uid://baenqf35gqsax" path="res://Asset/amongOSbg.png" id="7_nhmco"]
+[ext_resource type="FontFile" uid="uid://cv0sa2ok1ntbn" path="res://Asset/DotGothic16-Regular.ttf" id="7_tw53o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xdjn1"]
+texture = ExtResource("7_bt8xy")
+texture_margin_left = 64.0
+texture_margin_right = 64.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thh3r"]
 bg_color = Color(0.737255, 0.733333, 0.490196, 1)
@@ -123,6 +137,9 @@ _data = {
 "RESET": SubResource("Animation_mia5f")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ex5ph"]
+texture = ExtResource("3_1eu12")
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -131,13 +148,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hat3v")
+textures = Array[Texture2D]([ExtResource("4_7768a"), ExtResource("3_roy44"), ExtResource("4_s0dpa"), ExtResource("5_p7dmq"), ExtResource("6_bsaev")])
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+self_modulate = Color(1, 0.74902, 0.85098, 0.827451)
+texture_filter = 1
+layout_mode = 0
+offset_right = 1624.0
+offset_bottom = 896.0
+texture = ExtResource("7_nhmco")
+stretch_mode = 1
 
 [node name="PlayButton" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 0
-offset_left = 664.0
-offset_top = 648.0
+offset_left = 568.0
+offset_top = 368.0
 offset_right = 904.0
-offset_bottom = 776.0
+offset_bottom = 560.0
+theme_override_colors/font_color = Color(0.752941, 0.509804, 0.109804, 1)
+theme_override_fonts/font = ExtResource("7_tw53o")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_xdjn1")
 text = "Play"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -148,9 +180,6 @@ offset_right = 1406.0
 offset_bottom = 272.0
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
-text = "[center][wave amp=50.0 freq=5.0 connected=1][rainbow freq=.50 sat=0.8 val=0.8]
-Welcome to the Jam
-[/rainbow][/wave][/center]"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -188,6 +217,27 @@ libraries = {
 "": SubResource("AnimationLibrary_14ddw")
 }
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 616.0
+offset_right = 304.0
+offset_bottom = 832.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_ex5ph")
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 48.0
+offset_right = 48.0
+offset_bottom = 72.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel"]
+position = Vector2(120, 136)
+texture = ExtResource("4_7768a")
+hframes = 5
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = -40.0
@@ -201,15 +251,6 @@ offset_right = 1640.0
 offset_bottom = 904.0
 color = Color(0, 0, 0, 1)
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Panel2" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="Panel/Button" to="." method="_on_next_Skin_button_pressed"]

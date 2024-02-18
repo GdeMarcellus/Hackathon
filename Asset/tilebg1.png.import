@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nicphgvrxx10"
-path="res://.godot/imported/Frame 1-sheet.png-142a2f6f47112be060e9f87ca40822c2.ctex"
+uid="uid://ktkvvvq4s1ed"
+path="res://.godot/imported/tilebg1.png-91fc1f33ddb88e107727d28daac5bd53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Frame 1-sheet.png"
-dest_files=["res://.godot/imported/Frame 1-sheet.png-142a2f6f47112be060e9f87ca40822c2.ctex"]
+source_file="res://Asset/tilebg1.png"
+dest_files=["res://.godot/imported/tilebg1.png-91fc1f33ddb88e107727d28daac5bd53.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

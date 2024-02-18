@@ -38,10 +38,19 @@ func _level_up():
 func _on_popup_menu_item_selected(index):
 	var temp = Levelup.get_item_metadata(index)
 	availableAbility.avaiable_ability.erase(temp)
+	_add_ability(temp)
 	emit_signal("ability_picked", temp)
 	levelupTexture.hide()
 
-
+func _add_ability(temp):
+	var icon_display = $Control/Icondisplay
+	for each in icon_display.get_children():
+		if each.is_in_group("TextureIcon"):
+			if each.texture == null:
+				var temp_scene = temp.instantiate()
+				each.texture = temp_scene.icon
+				temp_scene.queue_free()
+				return
 
 
 func _on_popup_menu_visibility_changed():
