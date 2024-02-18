@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1820x6f5b3xy"]
+
+[ext_resource type="Theme" uid="uid://db5hnr0gnd5vl" path="res://Asset/Default.tres" id="1_2sqfd"]
+[ext_resource type="Script" path="res://Asset/DamageLabel.gd" id="1_4cq2i"]
+
+[node name="DamageLabel" type="Label"]
+modulate = Color(1, 0.65098, 0.654902, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2sqfd")
+script = ExtResource("1_4cq2i")

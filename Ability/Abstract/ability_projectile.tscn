@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmsl61ly0mubl"]
+
+[ext_resource type="PackedScene" uid="uid://hy813u0xead4" path="res://Ability/Abstract/Ability.tscn" id="1_gviql"]
+[ext_resource type="Script" path="res://Ability/Abstract/AbilityProjectile.gd" id="2_lp5e6"]
+
+[node name="AbilityProjectile" instance=ExtResource("1_gviql")]
+script = ExtResource("2_lp5e6")
+projectile = null

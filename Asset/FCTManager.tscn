@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xjp5ebq7ausd"]
+
+[ext_resource type="Script" path="res://Asset/FCTManager.gd" id="1_5c07p"]
+
+[node name="FctManager" type="Node2D"]
+script = ExtResource("1_5c07p")

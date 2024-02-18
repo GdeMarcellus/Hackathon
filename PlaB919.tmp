@@ -1,0 +1,241 @@
+[gd_scene load_steps=24 format=3 uid="uid://bjjik3y8gtdif"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_vuu75"]
+[ext_resource type="PackedScene" uid="uid://cw5it0ux6xre1" path="res://Component/HitBox/Hurtbox.tscn" id="3_dep1d"]
+[ext_resource type="Script" path="res://AbillitiesTarget.gd" id="3_gertx"]
+[ext_resource type="PackedScene" uid="uid://ci8pofd37kmwh" path="res://Ability/slowdown_ability.tscn" id="4_1x83p"]
+[ext_resource type="PackedScene" uid="uid://bonlyfrel4wx" path="res://Ability/disc_projectile.tscn" id="4_bmuhs"]
+[ext_resource type="PackedScene" uid="uid://dnho511v2mtwg" path="res://Ability/flame_ability.tscn" id="4_kd3x8"]
+[ext_resource type="Script" path="res://Enemy/Stats.gd" id="5_bhs62"]
+[ext_resource type="PackedScene" uid="uid://c7ymb8vfpi7tr" path="res://Ability/bolt_abillity.tscn" id="5_odd8w"]
+[ext_resource type="Script" path="res://UI.gd" id="6_ofm5i"]
+[ext_resource type="Texture2D" uid="uid://nicphgvrxx10" path="res://Frame 1-sheet.png" id="6_s74ng"]
+[ext_resource type="Theme" uid="uid://db5hnr0gnd5vl" path="res://Asset/Default.tres" id="7_y3rji"]
+[ext_resource type="Script" path="res://AvailableAbility.gd" id="9_dc44a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yp0hw"]
+size = Vector2(48, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6g2q6"]
+size = Vector2(16, 56)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_boqfp"]
+radius = 448.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hmd5k"]
+radius = 48.0
+
+[sub_resource type="Animation" id="Animation_gerbl"]
+resource_name = "Idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_bxl8o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ppylm"]
+_data = {
+"Idle": SubResource("Animation_gerbl"),
+"RESET": SubResource("Animation_bxl8o")
+}
+
+[sub_resource type="Animation" id="Animation_eatxv"]
+resource_name = "Idle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_icmuo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_27hff"]
+resource_name = "Invincible"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sfh1j"]
+_data = {
+"Idle": SubResource("Animation_eatxv"),
+"Invincible": SubResource("Animation_27hff"),
+"RESET": SubResource("Animation_icmuo")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_vuu75")
+
+[node name="Physical" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yp0hw")
+
+[node name="HurtBox" parent="." instance=ExtResource("3_dep1d")]
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_6g2q6")
+
+[node name="Abillities" type="Node2D" parent="."]
+script = ExtResource("3_gertx")
+
+[node name="DiscProjectile" parent="Abillities" instance=ExtResource("4_bmuhs")]
+ability_descrtiption = null
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("5_bhs62")
+
+[node name="Timer" type="Timer" parent="Stats"]
+wait_time = 0.01
+autostart = true
+
+[node name="Attract" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attract"]
+shape = SubResource("CircleShape2D_boqfp")
+
+[node name="PickUp" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUp"]
+shape = SubResource("CircleShape2D_hmd5k")
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("6_ofm5i")
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("7_y3rji")
+
+[node name="EXPBar" type="ProgressBar" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+mouse_filter = 1
+max_value = 2.0
+rounded = true
+
+[node name="PopupMenu" type="ItemList" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 640.0
+offset_top = 342.0
+offset_right = -614.0
+offset_bottom = -254.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("7_y3rji")
+icon_scale = 3.0
+
+[node name="AvailableAbility" type="Node" parent="UI"]
+script = ExtResource("9_dc44a")
+avaiable_ability = Array[PackedScene]([ExtResource("4_kd3x8"), ExtResource("5_odd8w"), ExtResource("4_1x83p"), ExtResource("4_bmuhs")])
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_s74ng")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ppylm")
+}
+autoplay = "Idle"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sfh1j")
+}
+autoplay = "Idle"
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="invincibility_ended" from="HurtBox" to="." method="_on_hurt_box_invincibility_ended"]
+[connection signal="invincibility_started" from="HurtBox" to="." method="_on_hurt_box_invincibility_started"]
+[connection signal="Exp_change" from="Stats" to="UI" method="_on_stats_exp_change"]
+[connection signal="dead" from="Stats" to="." method="_on_stats_dead"]
+[connection signal="health_changed" from="Stats" to="HurtBox" method="_on_stats_health_changed"]
+[connection signal="level_up" from="Stats" to="." method="_level_up"]
+[connection signal="timeout" from="Stats/Timer" to="Stats" method="_on_timer_timeout"]
+[connection signal="area_entered" from="Attract" to="." method="_on_attract_area_entered"]
+[connection signal="area_entered" from="PickUp" to="." method="_on_pick_up_area_entered"]
+[connection signal="ability_picked" from="UI" to="." method="_on_ui_ability_picked"]
+[connection signal="hidden" from="UI/Control/PopupMenu" to="UI" method="_on_popup_menu_popup_hide"]
+[connection signal="item_selected" from="UI/Control/PopupMenu" to="UI" method="_on_popup_menu_item_selected"]
+[connection signal="mouse_entered" from="UI/Control/PopupMenu" to="UI" method="_on_popup_menu_mouse_entered"]
+
+[editable path="HurtBox"]

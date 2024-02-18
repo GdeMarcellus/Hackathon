@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnho511v2mtwg"]
+
+[ext_resource type="PackedScene" uid="uid://bmsl61ly0mubl" path="res://Ability/Abstract/ability_projectile.tscn" id="1_vgonb"]
+[ext_resource type="Script" path="res://Ability/flame_ability.gd" id="2_ma8ib"]
+[ext_resource type="PackedScene" uid="uid://b6wta5hb2lpgi" path="res://Projectile/Flame.tscn" id="3_khh1d"]
+[ext_resource type="Texture2D" uid="uid://d28dsp365x3xj" path="res://Asset/questionmark.png" id="4_a2v0o"]
+
+[node name="Flame_Ability" instance=ExtResource("1_vgonb")]
+script = ExtResource("2_ma8ib")
+projectile = ExtResource("3_khh1d")
+ability_name = "Flame thrower"
+ability_descrtiption = "A powerfull and questioning ability."
+icon = ExtResource("4_a2v0o")
+delay = 0.6
+
+[node name="Timer2" type="Timer" parent="." index="1"]
+wait_time = 0.02
+
+[node name="Timer3" type="Timer" parent="." index="2"]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="Timer2" to="." method="_spawn_bullet"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]

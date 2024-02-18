@@ -1,0 +1,165 @@
+[gd_scene load_steps=18 format=3 uid="uid://c47vpng4b3vrt"]
+
+[ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_qauoj"]
+[ext_resource type="PackedScene" uid="uid://cgpcu18ugr1h" path="res://Item/Item.tscn" id="2_c5rds"]
+[ext_resource type="PackedScene" uid="uid://cxa5y0yt7ut8h" path="res://Component/HitBox/Hitbox.tscn" id="2_i1nq0"]
+[ext_resource type="PackedScene" uid="uid://cw5it0ux6xre1" path="res://Component/HitBox/Hurtbox.tscn" id="3_fotr0"]
+[ext_resource type="PackedScene" uid="uid://xjp5ebq7ausd" path="res://Asset/FCTManager.tscn" id="3_ovkpn"]
+[ext_resource type="Script" path="res://Enemy/Stats.gd" id="5_528i1"]
+[ext_resource type="Texture2D" uid="uid://c8sp0kgxx5gwi" path="res://Asset/computer_surfing_sc.png" id="5_jilsm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jwq3"]
+size = Vector2(96, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e4dys"]
+size = Vector2(32, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x31tu"]
+size = Vector2(96, 96)
+
+[sub_resource type="Animation" id="Animation_ski0d"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_t50j2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ngpt"]
+_data = {
+"Idle": SubResource("Animation_ski0d"),
+"RESET": SubResource("Animation_t50j2")
+}
+
+[sub_resource type="Animation" id="Animation_katfi"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_noiy1"]
+resource_name = "Invincible"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_phill"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_of4dc"]
+_data = {
+"Idle": SubResource("Animation_katfi"),
+"Invincible": SubResource("Animation_noiy1"),
+"RESET": SubResource("Animation_phill")
+}
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 16
+script = ExtResource("1_qauoj")
+drop = ExtResource("2_c5rds")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8jwq3")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_i1nq0")]
+collision_layer = 192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_e4dys")
+
+[node name="HurtBox" parent="." instance=ExtResource("3_fotr0")]
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("RectangleShape2D_x31tu")
+
+[node name="Timer" parent="HurtBox" index="1"]
+wait_time = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("5_jilsm")
+hframes = 8
+
+[node name="FctManager" parent="." instance=ExtResource("3_ovkpn")]
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("5_528i1")
+MAX_HEALTH = 2
+HEALTH = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ngpt")
+}
+autoplay = "Idle"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_of4dc")
+}
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="invincibility_ended" from="HurtBox" to="." method="_on_hurt_box_invincibility_ended"]
+[connection signal="invincibility_started" from="HurtBox" to="." method="_on_hurt_box_invincibility_started"]
+[connection signal="dead" from="Stats" to="." method="_on_stats_dead"]
+[connection signal="health_changed" from="Stats" to="HurtBox" method="_on_stats_health_changed"]
+[connection signal="health_changed" from="Stats" to="FctManager" method="_on_stats_health_changed"]
+
+[editable path="Hitbox"]
+[editable path="HurtBox"]

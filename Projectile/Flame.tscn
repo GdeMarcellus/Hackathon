@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6wta5hb2lpgi"]
+
+[ext_resource type="PackedScene" uid="uid://dmuim458s8myy" path="res://Projectile/Projectile.tscn" id="1_t5jkh"]
+[ext_resource type="Texture2D" uid="uid://d28dsp365x3xj" path="res://Asset/questionmark.png" id="2_g1co0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3dxc"]
+size = Vector2(32, 32)
+
+[node name="Projectile" instance=ExtResource("1_t5jkh")]
+scale = Vector2(0.25, 0.25)
+
+[node name="Projectile" parent="." index="0"]
+texture_filter = 1
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_g1co0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("RectangleShape2D_v3dxc")
+
+[editable path="Hitbox"]
